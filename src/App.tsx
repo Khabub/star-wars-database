@@ -2,11 +2,11 @@ import Menu from "./components/Menu";
 import styled from "styled-components";
 import Pages from "./components/Pages";
 
-const App = (): JSX.Element => {
-  console.log("Update");
+const App = (): JSX.Element => {  
   return (
     <Container>
-      <h1>Hello</h1>
+      <h1>Star Wars Database</h1>
+      
       <Menu />
       <Pages />
     </Container>
@@ -16,6 +16,10 @@ const App = (): JSX.Element => {
 export default App;
 
 const Container = styled.div`
-  width: 90vw;
+  width: 100vw;
   margin: 0 auto;
+
+  h1 {
+    text-align: center;
+  }
 `;

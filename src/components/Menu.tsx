@@ -16,13 +16,11 @@ const Menu = () => {
 
 export default Menu;
 
-
 const UL = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  
-  
+  margin-bottom: 2rem;
 
   a {
     text-decoration: none;
@@ -30,7 +28,6 @@ const UL = styled.ul`
     padding: 0.5rem;
     background: #dadada;
     border-radius: 0.3rem;
-
 
     &:hover,
     &.active,

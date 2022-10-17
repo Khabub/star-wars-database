@@ -1,6 +1,8 @@
 // const axios = require("axios").default;
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loading from "./Loading";
+import Button from "./UI/Button";
 
 interface PlanetsInterface {
   name: string;
@@ -19,7 +21,6 @@ const Planets = () => {
             params: { page: i },
           });
           setData((prev) => [...prev, ...response.data.results]);
-          console.log(response.data);
         } catch (e) {
           console.error(e);
         }
@@ -29,25 +30,18 @@ const Planets = () => {
     };
     getData();
 
-    return () => {
-      console.log("cleaning");
-    };
+    return () => {};
   }, []);
 
   const list = data
     ? data.map((value, index) => {
-        return (
-          <p
-            key={index}
-          >{`${index}, Name: ${value.name}, Climate: ${value.climate}`}</p>
-        );
+        return <Button key={index} name={value.name} />;
       })
     : null;
 
   return (
-    <div>
-      <h1>Planets</h1>
-      {loading ? <h1>LOADING...</h1> : list}
+    <div style={{display: "flex", justifyContent: "center", flexWrap: "wrap"}}>         
+      {loading ? <Loading /> : list}
     </div>
   );
 };

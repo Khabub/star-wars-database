@@ -1,6 +1,8 @@
 // const axios = require("axios").default;
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loading from "./Loading";
+import Button from "./UI/Button";
 
 interface SpeciesInterface {
   name: string;
@@ -16,7 +18,6 @@ const Species = () => {
       try {
         const response = await axios.get("https://swapi.dev/api/species/");
         setData(response.data.results);
-        console.log(response.data);
       } catch (e) {
         console.error(e);
       }
@@ -24,25 +25,24 @@ const Species = () => {
     };
     getData();
 
-    return () => {
-      console.log("cleaning");
-    };
+    return () => {};
   }, []);
 
   const list = data
     ? data.map((value, index) => {
         return (
-          <p
+          <Button
             key={index}
-          >{`Name: ${value.name}, Language: ${value.language}`}</p>
+            name={value.name}
+          / >
         );
       })
     : null;
 
   return (
     <div>
-      <h1>Species</h1>
-      {loading ? <h1>LOADING...</h1> : list}
+      <h2>Species</h2>
+      {loading ? <Loading /> : list}
     </div>
   );
 };
