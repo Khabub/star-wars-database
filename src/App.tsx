@@ -1,33 +1,21 @@
-import useAxios from "./hooks/useAxios";
-import { useEffect } from "react";
+import Menu from "./components/Menu";
+import styled from "styled-components";
+import Pages from "./components/Pages";
 
 const App = (): JSX.Element => {
-  const { loading, data, getData } = useAxios();
-
-  useEffect(() => {
-    getData("https://swapi.dev/api/planets/");
-   
-
-    return () => {
-      console.log("cleaning");
-    };
-  }, [getData]);
-
-  const list = data
-    ? data.map((value, index) => {
-        return (
-          <p key={index}>{`Name: ${value.name}, Climate: ${value.climate}`}</p>
-        );
-      })
-    : null;
-
-  console.log(data)
+  console.log("Update");
   return (
-    <div>
+    <Container>
       <h1>Hello</h1>
-      {loading ? <h1>LOADING...</h1> : list}
-    </div>
+      <Menu />
+      <Pages />
+    </Container>
   );
 };
 
 export default App;
+
+const Container = styled.div`
+  width: 90vw;
+  margin: 0 auto;
+`;
