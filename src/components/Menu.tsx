@@ -8,6 +8,10 @@ const Menu = () => {
         <li>
           <NavLink to="planets">Planets</NavLink>
           <NavLink to="species">Species</NavLink>
+          <NavLink to="people">People</NavLink>
+          <NavLink to="films">Films</NavLink>
+          <NavLink to="starships">Starships</NavLink>
+          <NavLink to="vehicles">Vehicles</NavLink>
         </li>
       </UL>
     </>
@@ -21,13 +25,14 @@ const UL = styled.ul`
   margin: 0;
   padding: 0;
   margin-bottom: 2rem;
+  text-align: center;
 
   a {
     text-decoration: none;
     margin: 0 1rem;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     background: #dadada;
-    border-radius: 0.3rem;
+    border-radius: 0.3rem;    
 
     &:hover,
     &.active,

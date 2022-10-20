@@ -4,15 +4,15 @@ import Button from "./UI/Button";
 import { PagesContainer } from "./Pages.styles";
 import { swCategories } from "./store/sw-data";
 
-interface PlanetsInterface {
+interface StarshipsInterface {
   name: string;
-  climate: string;
+  
 }
 
-const Planets = () => {
-  const { loading, data } = useAxios<PlanetsInterface>(
-    swCategories.planets.url,
-    swCategories.planets.pages
+const Starships = () => {
+  const { loading, data } = useAxios<StarshipsInterface>(
+    swCategories.starships.url,
+    swCategories.starships.pages
   );
 
   const list = data.map((value, index) => (
@@ -22,4 +22,4 @@ const Planets = () => {
   return <PagesContainer>{loading ? <Loading /> : list}</PagesContainer>;
 };
 
-export default Planets;
+export default Starships;

@@ -4,22 +4,22 @@ import Button from "./UI/Button";
 import { PagesContainer } from "./Pages.styles";
 import { swCategories } from "./store/sw-data";
 
-interface PlanetsInterface {
-  name: string;
-  climate: string;
+interface FilmsInterface {
+  title: string;
+  
 }
 
-const Planets = () => {
-  const { loading, data } = useAxios<PlanetsInterface>(
-    swCategories.planets.url,
-    swCategories.planets.pages
+const Films = () => {
+  const { loading, data } = useAxios<FilmsInterface>(
+    swCategories.films.url,
+    swCategories.films.pages
   );
 
   const list = data.map((value, index) => (
-    <Button key={index} name={value.name} />
+    <Button key={index} name={value.title} />
   ));
 
   return <PagesContainer>{loading ? <Loading /> : list}</PagesContainer>;
 };
 
-export default Planets;
+export default Films;
