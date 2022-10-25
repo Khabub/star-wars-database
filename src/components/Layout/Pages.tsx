@@ -1,11 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Planets from "./Planets";
-import Species from "./Species";
+import Planets from "../Categories/Planets";
+import Species from "../Categories/Species";
 import styled from "styled-components";
-import People from "./People";
-import Films from "./Films";
-import Starships from "./Starships";
-import Vehicles from "./Vehicles";
+import People from "../Categories/People";
+import Films from "../Categories/Films";
+import Starships from "../Categories/Starships";
+import Vehicles from "../Categories/Vehicles";
 
 const Pages = () => {
   return (
@@ -27,7 +27,7 @@ export default Pages;
 
 
 const StyledPages = styled.div`   
-  background: yellow;
+  
   padding: 1rem 0;
   
 `;

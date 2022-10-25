@@ -1,8 +1,8 @@
-import useAxios from "./hooks/useAxios";
-import Loading from "./UI/Loading";
-import Button from "./UI/Button";
-import { PagesContainer } from "./Pages.styles";
-import { swCategories } from "./store/sw-data";
+import useAxios from "../hooks/useAxios";
+import Loading from "../UI/Loading";
+import Button from "../UI/Button";
+import { PagesContainer } from "../Layout/Pages.styles";
+import { swCategories } from "../store/sw-data";
 
 interface SpeciesInterface {
   name: string;
