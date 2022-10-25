@@ -24,7 +24,7 @@ const App = (): JSX.Element => {
 
       <Menu />
 
-       <Pages />
+      <Pages />
       {/* <p>{`X: ${pos.x} , Y: ${pos.y} , ${window.screen.width}`}</p> */}
     </Container>
   );
@@ -44,7 +44,7 @@ const Container = styled.div`
     height: 100vh;
     object-fit: cover;
     object-position: center;
-    
+
     position: fixed;
     z-index: -5;
     filter: blur(0.2rem) opacity(80%);
@@ -54,6 +54,6 @@ const Container = styled.div`
     text-align: center;
     font-size: 1.9rem;
     color: #eeaf3b;
-    text-shadow: 3px 3px 3px black;;
+    text-shadow: 3px 3px 3px black;
   }
 `;

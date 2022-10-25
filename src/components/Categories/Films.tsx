@@ -6,8 +6,9 @@ import { swCategories } from "../store/sw-data";
 import { useState } from "react";
 import ModalInfo from "../Layout/ModalInfo";
 
-interface FilmsInterface {
+export interface FilmsInterface {
   title: string;
+  episode_id: number;
 }
 
 const Films = () => {
@@ -17,11 +18,14 @@ const Films = () => {
   );
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [titleFilm, setTitleFilm] = useState<string>("");
+  const [titleFilm, setTitleFilm] = useState<FilmsInterface>();
 
-  const handleEnter = (val: string) => {
+  const handleEnter = (val: FilmsInterface) => {
     setShowModal(true);
-    setTitleFilm(val);
+    setTitleFilm({
+      title: val.title,
+      episode_id: val.episode_id,
+    });
   };
 
   const handleLeave = () => {
@@ -32,15 +36,15 @@ const Films = () => {
     <Button
       key={index}
       name={value.title}
-      onEnter={handleEnter.bind(null, value.title)}
-      onLeave={handleLeave.bind(null, value.title)}
+      onEnter={handleEnter.bind(null, value)}
+      onLeave={handleLeave.bind(null, value)}
     />
   ));
 
   return (
     <PagesContainer>
       {loading ? <Loading /> : list}
-      {showModal ? <ModalInfo title={titleFilm} /> : ""}
+      {showModal ? <ModalInfo titleMy={titleFilm!} /> : ""}
     </PagesContainer>
   );
 };

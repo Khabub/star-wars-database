@@ -18,7 +18,7 @@ const Button = (props: Props) => {
 export default Button;
 
 const StyledButton = styled.button`
-  width: 150px;
+  width: 190px;
   padding: 0.2rem;
   margin: 0.1rem;
   border-radius: 0.5rem;
