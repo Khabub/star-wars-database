@@ -17,6 +17,7 @@ const Container = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
+  translate: -50% -50%;
   width: 50px;
   height: 50px;
   border-radius: 50%;
