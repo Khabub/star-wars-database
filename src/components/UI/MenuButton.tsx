@@ -8,12 +8,7 @@ interface Props {
   active?: boolean;
 }
 
-
 const MenuButton = (props: Props) => {
-
-
-
-
   return (
     <UL>
       <li>
@@ -32,20 +27,23 @@ const UL = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  
-  
 
   li {
-    
     a {
       text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+     /*  -webkit-touch-callout: none;
+      -webkit-text-size-adjust: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-user-select: none; */
+
       h4 {
         color: #90b331;
         text-shadow: 2px 2px 2px black;
-        margin: 0;        
+        margin: 0;
       }
-      
-      img {        
+
+      img {
         margin: 0.3rem;
         width: 100px;
         height: 60px;
@@ -57,7 +55,7 @@ const UL = styled.ul`
         &:hover,
         &.active,
         &:active {
-          border-color: #77e954;          
+          border-color: #77e954;
         }
       }
     }
