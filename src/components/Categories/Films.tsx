@@ -14,7 +14,7 @@ export interface FilmsInterface {
 
 const initial: FilmsInterface = {
   title: "",
-  episode_id: null,
+  episode_id: 0,
   opening_crawl: "",
 }
 
