@@ -12,7 +12,7 @@ export interface FilmsInterface {
   opening_crawl: string;
 }
 
-const initial = {
+const initial: FilmsInterface = {
   title: "",
   episode_id: null,
   opening_crawl: "",
