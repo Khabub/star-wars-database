@@ -49,7 +49,7 @@ const Films = () => {
   return (
     <PagesContainer>
       {loading ? <Loading /> : list}
-      {showModal ? <ModalInfo titleMy={titleFilm!} /> : ""}
+      {showModal ? <ModalInfo titleMy={titleFilm} /> : ""}
     </PagesContainer>
   );
 };
