@@ -11,6 +11,11 @@ export interface FilmsInterface {
   episode_id: number;
 }
 
+const initial = {
+  title: "",
+  episode_id: number,
+}
+
 const Films = () => {
   const { loading, data } = useAxios<FilmsInterface>(
     swCategories.films.url,
@@ -18,7 +23,7 @@ const Films = () => {
   );
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [titleFilm, setTitleFilm] = useState<FilmsInterface>();
+  const [titleFilm, setTitleFilm] = useState<FilmsInterface>(initial);
 
   const handleEnter = (val: FilmsInterface) => {
     setShowModal(true);
