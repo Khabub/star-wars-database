@@ -9,11 +9,13 @@ import ModalInfo from "../Layout/ModalInfo";
 export interface FilmsInterface {
   title: string;
   episode_id: number;
+  opening_crawl: string;
 }
 
 const initial = {
   title: "",
   episode_id: number,
+  opening_crawl: string,
 }
 
 const Films = () => {
@@ -23,13 +25,14 @@ const Films = () => {
   );
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [titleFilm, setTitleFilm] = useState<FilmsInterface>(initial);
+  const [films, setFilms] = useState<FilmsInterface>(initial);
 
   const handleEnter = (val: FilmsInterface) => {
     setShowModal(true);
-    setTitleFilm({
+    setFilms({
       title: val.title,
       episode_id: val.episode_id,
+      opening_crawl: val.opening_crawl,
     });
   };
 
@@ -49,7 +52,7 @@ const Films = () => {
   return (
     <PagesContainer>
       {loading ? <Loading /> : list}
-      {showModal ? <ModalInfo titleMy={titleFilm} /> : ""}
+      {showModal ? <ModalInfo films={films} /> : ""}
     </PagesContainer>
   );
 };
