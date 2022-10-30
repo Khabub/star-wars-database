@@ -12,7 +12,7 @@ export interface FilmsInterface {
   opening_crawl: string;
   director: string;
   producer: string;
-  release_date: string
+  release_date: string;
 }
 
 const initial: FilmsInterface = {
@@ -22,7 +22,7 @@ const initial: FilmsInterface = {
   director: "",
   producer: "",
   release_date: "",
-}
+};
 
 const Films = () => {
   const { loading, data } = useAxios<FilmsInterface>(
@@ -47,21 +47,20 @@ const Films = () => {
 
   const closeDetails = () => {
     setShowModal(false);
-  }
-
+  };
 
   const list = data.map((value, index) => (
     <Button
       key={index}
       name={value.title}
-      onClick={handleClick.bind(null, value)}      
+      onClick={handleClick.bind(null, value)}
     />
   ));
 
   return (
     <PagesContainer>
       {loading ? <Loading /> : list}
-      {showModal ? <ModalFilms details={details} onClose={closeDetails}/> : ""}
+      {showModal ? <ModalFilms details={details} onClose={closeDetails} /> : ""}
     </PagesContainer>
   );
 };

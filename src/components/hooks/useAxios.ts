@@ -21,7 +21,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
             signal: signal,
           });
           setData((prev) => [...prev, ...response.data.results]);
-          console.log("Obsah data", response.data.results);
+          console.log(response.data.results);
         } catch (err) {
           const errors = err as Error | AxiosError;
 

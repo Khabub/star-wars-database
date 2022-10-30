@@ -9,7 +9,7 @@ interface Props {
 
 const Button = (props: Props) => {
   return (
-    <StyledButton onMouseEnter={props.onClick}>
+    <StyledButton onClick={props.onClick}>
       {props.name}
     </StyledButton>
   );

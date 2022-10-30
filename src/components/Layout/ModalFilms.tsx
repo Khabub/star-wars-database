@@ -11,7 +11,7 @@ interface Props {
 const ModalFilms = (props: Props) => {
   return (
     <Modal onClose={props.onClose}>
-      <Container>
+      <Container onClick={props.onClose}>
         <H1>{props.details.title}</H1>
         <H1>Epizoda: {props.details.episode_id}</H1>
         <H1>Text: {props.details.opening_crawl}</H1>

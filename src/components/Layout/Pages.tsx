@@ -11,7 +11,7 @@ const Pages = () => {
   return (
     <StyledPages>
       <Routes>
-        <Route path="/" element={<Navigate to="planets" />} />
+        <Route path="/" element={<Navigate to="films" />} />
         <Route path="planets" element={<Planets />} />
         <Route path="species" element={<Species />} />
         <Route path="people" element={<People />} />
