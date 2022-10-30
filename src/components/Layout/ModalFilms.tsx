@@ -15,6 +15,9 @@ const ModalFilms = (props: Props) => {
         <H1>{props.details.title}</H1>
         <H1>Epizoda: {props.details.episode_id}</H1>
         <H1>Text: {props.details.opening_crawl}</H1>
+        <H1>Director: {props.details.director}</H1>
+        <H1>Producer: {props.details.producer}</H1>
+        <H1>Release: {props.details.release_date}</H1>
       </Container>
     </Modal>
   );
