@@ -10,12 +10,18 @@ export interface FilmsInterface {
   title: string;
   episode_id: number;
   opening_crawl: string;
+  director: string;
+  producer: string;
+  release_date: string
 }
 
 const initial: FilmsInterface = {
   title: "",
   episode_id: 0,
   opening_crawl: "",
+  director: "",
+  producer: "",
+  release_date: "",
 }
 
 const Films = () => {
@@ -33,6 +39,9 @@ const Films = () => {
       title: val.title,
       episode_id: val.episode_id,
       opening_crawl: val.opening_crawl,
+      director: val.director,
+      producer: val.producer,
+      release_date: val.release_date,
     });
   };
 
