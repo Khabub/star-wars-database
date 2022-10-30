@@ -3,13 +3,13 @@ import styled from "styled-components";
 interface Props {
   children?: React.ReactNode;
   name: string;
-  onEnter?: () => void;
-  onLeave?: () => void;
+  onClick?: () => void;
+  
 }
 
 const Button = (props: Props) => {
   return (
-    <StyledButton onMouseEnter={props.onEnter} onMouseLeave={props.onLeave}>
+    <StyledButton onMouseEnter={props.onClick}>
       {props.name}
     </StyledButton>
   );

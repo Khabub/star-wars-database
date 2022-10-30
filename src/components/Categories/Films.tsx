@@ -4,7 +4,7 @@ import Button from "../UI/Button";
 import { PagesContainer } from "../Layout/Pages.styles";
 import { swCategories } from "../store/sw-data";
 import { useState } from "react";
-import ModalInfo from "../Layout/ModalInfo";
+import ModalFilms from "../Layout/ModalFilms";
 
 export interface FilmsInterface {
   title: string;
@@ -25,34 +25,34 @@ const Films = () => {
   );
 
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [films, setFilms] = useState<FilmsInterface>(initial);
+  const [details, setDetails] = useState<FilmsInterface>(initial);
 
-  const handleEnter = (val: FilmsInterface) => {
+  const handleClick = (val: FilmsInterface) => {
     setShowModal(true);
-    setFilms({
+    setDetails({
       title: val.title,
       episode_id: val.episode_id,
       opening_crawl: val.opening_crawl,
     });
   };
 
-  const handleLeave = () => {
+  const closeDetails = () => {
     setShowModal(false);
-  };
+  }
+
 
   const list = data.map((value, index) => (
     <Button
       key={index}
       name={value.title}
-      onEnter={handleEnter.bind(null, value)}
-      onLeave={handleLeave.bind(null, value)}
+      onClick={handleClick.bind(null, value)}      
     />
   ));
 
   return (
     <PagesContainer>
       {loading ? <Loading /> : list}
-      {showModal ? <ModalInfo films={films} /> : ""}
+      {showModal ? <ModalFilms details={details} onClose={closeDetails}/> : ""}
     </PagesContainer>
   );
 };

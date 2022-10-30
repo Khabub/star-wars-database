@@ -4,13 +4,19 @@ import styled from "styled-components";
 
 interface Props {
   children?: React.ReactNode;
+  onClose: () => void;
 }
+
+const Backdrop = (props: Props) => {
+  return <StyledBackdrop onClick={props.onClose}></StyledBackdrop>;
+};
 
 const Modal = (props: Props) => {
   const portal = document.getElementById("modalInfo") as HTMLElement;
 
   return (
     <Fragment>
+      {ReactDOM.createPortal(<Backdrop onClose={props.onClose} />, portal)}
       {ReactDOM.createPortal(<Container>{props.children}</Container>, portal)}
     </Fragment>
   );
@@ -29,4 +35,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+`;
+
+const StyledBackdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);  
+  
 `;

@@ -4,22 +4,23 @@ import Modal from "../UI/Modal";
 
 interface Props {
   children?: React.ReactNode;
-  films: FilmsInterface;
+  details: FilmsInterface;
+  onClose: () => void;
 }
 
-const ModalInfo = (props: Props) => {
+const ModalFilms = (props: Props) => {
   return (
-    <Modal>
+    <Modal onClose={props.onClose}>
       <Container>
-        <H1>{props.films.title}</H1>
-        <H1>Epizoda: {props.films.episode_id}</H1>
-        <H1>Text: {props.films.opening_crawl}</H1>
+        <H1>{props.details.title}</H1>
+        <H1>Epizoda: {props.details.episode_id}</H1>
+        <H1>Text: {props.details.opening_crawl}</H1>
       </Container>
     </Modal>
   );
 };
 
-export default ModalInfo;
+export default ModalFilms;
 
 const Container = styled.div`
   display: flex;
