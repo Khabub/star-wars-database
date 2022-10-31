@@ -28,9 +28,9 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
           const errors = err as Error | AxiosError;
 
           if (axios.isAxiosError(err)) {
-            if (err.code === "ERR_BAD_REQUEST") {
+            if (err.code) {
               console.log("Cannot find a page");
-              message = "cannot find";
+              message = err.code;
               setError(message);
             }
           } else {
