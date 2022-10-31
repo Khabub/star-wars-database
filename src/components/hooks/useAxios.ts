@@ -6,20 +6,20 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<string>("");
 
-  const abortControllerRef = useRef<boolean>(false);
+  // const abortControllerRef = useRef<boolean>(false);
 
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
+    /* const controller = new AbortController();
+    const signal = controller.signal; */
     setLoading(true);
     setData([]);
 
-    const getData = async (signal: AbortSignal) => {
+    const getData = async () => {
       for (let i = 1; i <= n; i++) {
         try {
           const response = await axios.get(url, {
             params: { page: i },
-            signal: signal,
+            /* signal: signal, */
           });
           setData((prev) => [...prev, ...response.data.results]);
           console.log(response.data.results);
@@ -43,13 +43,13 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
       setLoading(false);
     };
 
-    if (abortControllerRef.current) {
-      getData(signal);
-    }
+    //if (abortControllerRef.current) {
+      getData();
+    //}
 
     return () => {
-      controller.abort();
-      abortControllerRef.current = true;
+      /* controller.abort();
+      abortControllerRef.current = true; */
     };
   }, [url, n]);
 
