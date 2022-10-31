@@ -6,11 +6,11 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<string>("");
 
-  // const abortControllerRef = useRef<boolean>(false);
-
   useEffect(() => {
-    /* const controller = new AbortController();
-    const signal = controller.signal; */
+    const controller = new AbortController();
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
     setLoading(true);
     setData([]);
 
@@ -19,13 +19,18 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
         try {
           const response = await axios.get(url, {
             params: { page: i },
-            /* signal: signal, */
+            cancelToken: source.token,
+            signal: controller.signal,
           });
           setData((prev) => [...prev, ...response.data.results]);
           console.log(response.data.results);
         } catch (err) {
           let message: string;
           const errors = err as Error | AxiosError;
+
+          if (axios.isCancel(errors)) {
+            setError(errors.message);
+          }
 
           if (axios.isAxiosError(err)) {
             if (err.code) {
@@ -43,13 +48,12 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
       setLoading(false);
     };
 
-    //if (abortControllerRef.current) {
-      getData();
-    //}
+    
+    getData();
+    
 
     return () => {
-      /* controller.abort();
-      abortControllerRef.current = true; */
+      controller.abort();      
     };
   }, [url, n]);
 
