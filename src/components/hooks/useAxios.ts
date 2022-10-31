@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T[]>([]);
-  const [error,setError] = useState();
+  const [error, setError] = useState<string>("");
 
   const abortControllerRef = useRef<boolean>(false);
 
@@ -24,12 +24,12 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
           setData((prev) => [...prev, ...response.data.results]);
           console.log(response.data.results);
         } catch (err) {
-          let message: any;
+          let message: string;
           const errors = err as Error | AxiosError;
 
           if (axios.isAxiosError(err)) {
             if (err.code === "ERR_BAD_REQUEST") {
-              console.error("Cannot find a page");
+              console.log("Cannot find a page");
               message = "cannot find";
               setError(message);
             }
@@ -56,8 +56,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
   return {
     loading,
     data,
-    error
-
+    error,
   };
 };
 

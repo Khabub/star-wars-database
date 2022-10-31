@@ -29,7 +29,7 @@ export const swCategories: Record<SwCategory, SwItems> = {
 
   films: {
     url: "https://swapi.dev/api/films/",
-    pages: 1,
+    pages: 2,
   },
 
   starships: {
