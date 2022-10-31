@@ -1,17 +1,20 @@
 import axios, { AxiosError } from "axios";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T[]>([]);
-  const [error, setError] = useState<string>("");
+  //const [error, setError] = useState<string>("");
 
   useEffect(() => {
+    
+    // UDĚLAT REF !!!!
+    //--------------------------------------------
     const controller = new AbortController();
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    setLoading(true);
+    setLoading(true);    
     setData([]);
 
     const getData = async () => {
@@ -23,44 +26,44 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
             signal: controller.signal,
           });
           setData((prev) => [...prev, ...response.data.results]);
-          console.log(response.data.results);
+          // console.log(response.data.results);
         } catch (err) {
-          let message: string;
-          const errors = err as Error | AxiosError;
+          //let message: string;
+          // const errors = err as Error | AxiosError;
 
-          if (axios.isCancel(errors)) {
+         /*  if (axios.isCancel(errors)) {
             setError(errors.message);
-          }
+          } */
+          console.log(err);
 
           if (axios.isAxiosError(err)) {
             if (err.code) {
-              console.log("Cannot find a page");
-              message = err.code;
-              setError(message);
+              console.log(err);
+              //message = String(err);
+              
             }
           } else {
-            console.log("normal errors, not axios error", errors.message);
-            message = "normal error";
-            setError(message);
+            console.log("normal errors, not axios error");
+            //message = "normal error";
+           
           }
         }
+        
       }
       setLoading(false);
     };
 
-    
     getData();
-    
 
     return () => {
-      controller.abort();      
+      controller.abort();
     };
   }, [url, n]);
 
   return {
     loading,
     data,
-    error,
+    
   };
 };
 

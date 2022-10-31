@@ -30,11 +30,12 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0 1rem;
-  background-color: #9c8e8e;
+  background-color: #2e2929;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  border-radius: 25px;
 `;
 
 const StyledBackdrop = styled.div`

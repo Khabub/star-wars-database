@@ -25,7 +25,7 @@ const initial: FilmsInterface = {
 };
 
 const Films = () => {
-  const { loading, data, error } = useAxios<FilmsInterface>(
+  const { loading, data } = useAxios<FilmsInterface>(
     swCategories.films.url,
     swCategories.films.pages
   );
@@ -59,7 +59,18 @@ const Films = () => {
 
   return (
     <PagesContainer>
-      <div style={{color: "red", padding: "1rem", fontWeight: "700"}}>{error}</div>
+     {/*  <div
+        style={{
+          position: "absolute",
+          left: "10px",
+          top: "0",
+          color: "red",
+          padding: "1rem",
+          fontWeight: "700",
+        }}
+      >
+        {error}
+      </div> */}
       {loading ? <Loading /> : list}
       {showModal ? <ModalFilms details={details} onClose={closeDetails} /> : ""}
     </PagesContainer>

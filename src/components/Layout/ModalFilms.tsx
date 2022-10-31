@@ -28,8 +28,9 @@ export default ModalFilms;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0;  
 `;
 
 const H1 = styled.h5`
-  color: orange;
+  color: #ebc889;
 `;
