@@ -61,7 +61,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
       setLoading(false);
     };
 
-    if (effectRef.current) {
+    if (!effectRef.current) {
       getData();
     }
 
