@@ -5,6 +5,7 @@ import { PagesContainer } from "../Layout/Pages.styles";
 import { swCategories } from "../store/sw-data";
 import { useState } from "react";
 import ModalFilms from "../Layout/ModalFilms";
+import { Error } from "./Category.styles";
 
 export interface FilmsInterface {
   title: string;
@@ -25,7 +26,7 @@ const initial: FilmsInterface = {
 };
 
 const Films = () => {
-  const { loading, data } = useAxios<FilmsInterface>(
+  const { loading, data, error } = useAxios<FilmsInterface>(
     swCategories.films.url,
     swCategories.films.pages
   );
@@ -59,18 +60,7 @@ const Films = () => {
 
   return (
     <PagesContainer>
-     {/*  <div
-        style={{
-          position: "absolute",
-          left: "10px",
-          top: "0",
-          color: "red",
-          padding: "1rem",
-          fontWeight: "700",
-        }}
-      >
-        {error}
-      </div> */}
+      {error.isError && <Error>{error.errorMessage}</Error>}
       {loading ? <Loading /> : list}
       {showModal ? <ModalFilms details={details} onClose={closeDetails} /> : ""}
     </PagesContainer>

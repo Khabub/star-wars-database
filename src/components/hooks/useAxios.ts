@@ -1,20 +1,30 @@
 import axios, { AxiosError } from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
+interface ErrorInterface {
+  errorMessage: string;
+  isError: boolean;
+}
+
+const errorInit: ErrorInterface = {
+  errorMessage: "",
+  isError: false,
+}
+
 
 const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T[]>([]);
-  //const [error, setError] = useState<string>("");
+  const [error, setError] = useState<ErrorInterface>(errorInit);
+
+  const effectRef = useRef<boolean>(false);
 
   useEffect(() => {
-    
-    // UDĚLAT REF !!!!
-    //--------------------------------------------
     const controller = new AbortController();
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    setLoading(true);    
+    setLoading(true);
     setData([]);
 
     const getData = async () => {
@@ -28,42 +38,43 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
           setData((prev) => [...prev, ...response.data.results]);
           // console.log(response.data.results);
         } catch (err) {
-          //let message: string;
-          // const errors = err as Error | AxiosError;
+          let message: string;
+          const errors = err as Error | AxiosError;
 
-         /*  if (axios.isCancel(errors)) {
-            setError(errors.message);
-          } */
-          console.log(err);
+          if (axios.isCancel(errors)) {
+            setError({errorMessage: errors.message, isError: true});
+          }          
 
           if (axios.isAxiosError(err)) {
             if (err.code) {
               console.log(err);
-              //message = String(err);
-              
+              message = String(err);
+              setError({errorMessage: message, isError: true});
             }
           } else {
             console.log("normal errors, not axios error");
-            //message = "normal error";
-           
+            message = "normal error";
+            setError({errorMessage: message, isError: true});
           }
         }
-        
       }
       setLoading(false);
     };
 
-    getData();
+    if (effectRef.current) {
+      getData();
+    }
 
     return () => {
       controller.abort();
+      effectRef.current = true;
     };
   }, [url, n]);
 
   return {
     loading,
     data,
-    
+    error,
   };
 };
 

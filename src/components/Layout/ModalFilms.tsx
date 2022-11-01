@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { FilmsInterface } from "../Categories/Films";
 import Modal from "../UI/Modal";
+import { H1, H2, P, ContainerFilms } from "./ModalCategory";
 
 interface Props {
   children?: React.ReactNode;
@@ -11,26 +11,21 @@ interface Props {
 const ModalFilms = (props: Props) => {
   return (
     <Modal onClose={props.onClose}>
-      <Container onClick={props.onClose}>
+      <ContainerFilms onClick={props.onClose}>
         <H1>{props.details.title}</H1>
-        <H1>Epizoda: {props.details.episode_id}</H1>
-        <H1>Text: {props.details.opening_crawl}</H1>
-        <H1>Director: {props.details.director}</H1>
-        <H1>Producer: {props.details.producer}</H1>
-        <H1>Release: {props.details.release_date}</H1>
-      </Container>
+        <H2>Episode</H2>
+        <P>{props.details.episode_id}</P>
+        <H2>Opening crawl</H2>
+        <P>{props.details.opening_crawl}</P>
+        <H2>Director</H2>
+        <P>{props.details.director}</P>
+        <H2>Producer</H2>
+        <P>{props.details.producer}</P>
+        <H2>Release</H2>
+        <P>{props.details.release_date}</P>
+      </ContainerFilms>
     </Modal>
   );
 };
 
 export default ModalFilms;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0;  
-`;
-
-const H1 = styled.h5`
-  color: #ebc889;
-`;

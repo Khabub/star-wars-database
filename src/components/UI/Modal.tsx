@@ -25,17 +25,15 @@ const Modal = (props: Props) => {
 export default Modal;
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 0 1rem;
-  background-color: #2e2929;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 1rem 1rem;
+  background-color: #2e2929;  
   text-align: center;
-  border-radius: 25px;
+  border-radius: 25px;  
+  box-shadow: 0 0 5px #fff;
 `;
 
 const StyledBackdrop = styled.div`
