@@ -35,7 +35,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
             signal: controller.signal,
           });
           setData((prev) => [...prev, ...response.data.results]);          
-          
+          setLoading(false);
         } catch (err) {
           let message: string;
           const errors = err as Error | AxiosError;
@@ -57,7 +57,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
           }
         }
       }
-      setLoading(false);
+      
     };
 
     if (!firstRunRef.current) {
