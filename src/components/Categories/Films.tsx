@@ -49,7 +49,7 @@ const Films = () => {
   const closeDetails = () => {
     setShowModal(false);
   };
-
+  
   const list = data.map((value, index) => (
     <Button
       key={index}

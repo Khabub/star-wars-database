@@ -33,7 +33,7 @@ const Container = styled.div`
   background-color: #2e2929;  
   text-align: center;
   border-radius: 25px;  
-  box-shadow: 0 0 5px #fff;
+  box-shadow: 0 0 5px #fff; 
 `;
 
 const StyledBackdrop = styled.div`
@@ -43,4 +43,5 @@ const StyledBackdrop = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
+  
 `;

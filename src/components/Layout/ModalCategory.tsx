@@ -5,10 +5,11 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const ContainerFilms = styled.div`
+export const ContainerBigger = styled.div`
   display: flex;
   flex-direction: column;
   width: 80vw;
+  overflow-y: scroll;  
 `;
 
 export const H1 = styled.h1`

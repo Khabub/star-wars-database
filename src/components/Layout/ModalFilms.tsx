@@ -1,6 +1,6 @@
 import { FilmsInterface } from "../Categories/Films";
 import Modal from "../UI/Modal";
-import { H1, H2, P, ContainerFilms } from "./ModalCategory";
+import { H1, H2, P, ContainerBigger } from "./ModalCategory";
 
 interface Props {
   children?: React.ReactNode;
@@ -11,7 +11,7 @@ interface Props {
 const ModalFilms = (props: Props) => {
   return (
     <Modal onClose={props.onClose}>
-      <ContainerFilms onClick={props.onClose}>
+      <ContainerBigger onClick={props.onClose}>
         <H1>{props.details.title}</H1>
         <H2>Episode</H2>
         <P>{props.details.episode_id}</P>
@@ -23,7 +23,7 @@ const ModalFilms = (props: Props) => {
         <P>{props.details.producer}</P>
         <H2>Release</H2>
         <P>{props.details.release_date}</P>
-      </ContainerFilms>
+      </ContainerBigger>
     </Modal>
   );
 };
