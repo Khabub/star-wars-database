@@ -22,7 +22,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    
+    setLoading(true);
     setData([]);
 
     if (effectRef.current) {
@@ -30,8 +30,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
       return;
     }
 
-    const getData = async () => {
-      setLoading(true);
+    const getData = async () => {      
       for (let i = 1; i <= n; i++) {
         try {
           const response = await axios.get(url, {
