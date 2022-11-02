@@ -15,7 +15,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<ErrorInterface>(errorInit);
 
-  const effectRef = useRef<boolean>(true);
+  const firstRunRef = useRef<boolean>(true);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -23,14 +23,10 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
     const source = CancelToken.source();
 
     setLoading(true);
-    //setData([]);
-
-    if (effectRef.current) {
-      effectRef.current = false;
-      return;
-    }
+    console.log("firstrun", firstRunRef.current)
 
     const getData = async () => {      
+      console.log("In getData function");
       for (let i = 1; i <= n; i++) {
         try {
           const response = await axios.get(url, {
@@ -64,12 +60,16 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
       setLoading(false);
     };
 
-    
-    getData();
+    if (!firstRunRef.current) {
+      getData();   
+      console.log("After GetData", firstRunRef.current);   
+    }
     
 
     return () => {      
       controller.abort();
+      firstRunRef.current = false;
+      console.log("useEffect cleaning", firstRunRef.current);
       
     };
   }, [url, n]);
