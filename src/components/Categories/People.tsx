@@ -66,7 +66,7 @@ const People = () => {
 
   return (
     <PagesContainer>
-       {error.isError && <Error>{error.errorMessage}</Error>}
+      {error.isError && <Error>{error.errorMessage}</Error>}
       {loading ? <Loading /> : list}
       {showModal ? (
         <ModalPeople details={details} onClose={closeDetails} />

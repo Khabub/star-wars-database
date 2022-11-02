@@ -12,27 +12,27 @@ interface MenuButtons {
 
 export const menuButtons: MenuButtons[] = [
   {
-    name: "planets",
+    name: "Planets",
     image: planetsImage,
   },
   {
-    name: "species",
+    name: "Species",
     image: speciesImage,
   },
   {
-    name: "people",
+    name: "People",
     image: peopleImage,
   },
   {
-    name: "films",
+    name: "Films",
     image: moviesImage,
   },
   {
-    name: "starships",
+    name: "Starships",
     image: starshipsImage,
   },
   {
-    name: "vehicles",
+    name: "Vehicles",
     image: vehiclesImage,
   },
 ];

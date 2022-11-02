@@ -59,9 +59,10 @@ const NavLinkStyled = styled(NavLink)`
     border: 2px solid blue;
     border-radius: 25px;
 
-    &:hover {
+    // hover dát jen u desktopu
+    /* &:hover {
       border-color: #bb831c;
       border-width: 4px;
-    }
+    } */
   }
 `;

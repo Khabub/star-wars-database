@@ -1,6 +1,5 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect, useRef } from "react";
-
 interface ErrorInterface {
   errorMessage: string;
   isError: boolean;
@@ -9,8 +8,7 @@ interface ErrorInterface {
 const errorInit: ErrorInterface = {
   errorMessage: "",
   isError: false,
-}
-
+};
 
 const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -35,26 +33,26 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
             cancelToken: source.token,
             signal: controller.signal,
           });
-          console.log(response);
           setData((prev) => [...prev, ...response.data.results]);          
+
         } catch (err) {
           let message: string;
           const errors = err as Error | AxiosError;
 
           if (axios.isCancel(errors)) {
-            setError({errorMessage: errors.message, isError: true});
-          }          
+            setError({ errorMessage: errors.message, isError: true });
+          }
 
           if (axios.isAxiosError(err)) {
             if (err.code) {
               console.log(err);
               message = String(err);
-              setError({errorMessage: message, isError: true});
+              setError({ errorMessage: message, isError: true });
             }
           } else {
             console.log("normal errors, not axios error");
             message = "normal error";
-            setError({errorMessage: message, isError: true});
+            setError({ errorMessage: message, isError: true });
           }
         }
       }
