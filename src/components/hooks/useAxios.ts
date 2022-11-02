@@ -15,17 +15,23 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<ErrorInterface>(errorInit);
 
-  const effectRef = useRef<boolean>(false);
+  const effectRef = useRef<boolean>(true);
 
   useEffect(() => {
     const controller = new AbortController();
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
 
-    setLoading(true);
+    
     setData([]);
 
+    if (effectRef.current) {
+      effectRef.current = false;
+      return;
+    }
+
     const getData = async () => {
+      setLoading(true);
       for (let i = 1; i <= n; i++) {
         try {
           const response = await axios.get(url, {
@@ -34,7 +40,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
             signal: controller.signal,
           });
           setData((prev) => [...prev, ...response.data.results]);          
-
+          
         } catch (err) {
           let message: string;
           const errors = err as Error | AxiosError;
@@ -59,13 +65,13 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
       setLoading(false);
     };
 
-    if (!effectRef.current) {
-      getData();
-    }
+    
+    getData();
+    
 
-    return () => {
+    return () => {      
       controller.abort();
-      effectRef.current = true;
+      
     };
   }, [url, n]);
 
