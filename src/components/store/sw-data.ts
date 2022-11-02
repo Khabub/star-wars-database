@@ -11,34 +11,36 @@ type SwCategory =
   | "starships"
   | "vehicles";
 
+  const urlMain: string = "https://swapi.dev/api/";
+
 export const swCategories: Record<SwCategory, SwItems> = {
   planets: {
-    url: "https://swapi.dev/api/planets/",
+    url: `{${urlMain}planets/`,
     pages: 6,
   },
 
   species: {
-    url: "https://swapi.dev/api/species/",
+    url: `{${urlMain}species/`,
     pages: 4,
   },
 
   people: {
-    url: "https://swapi.dev/api/people/",
+    url: `{${urlMain}people/`,
     pages: 9,
   },
 
   films: {
-    url: "https://swapi.dev/api/films/",
+    url: `{${urlMain}films/`,
     pages: 1,
   },
 
   starships: {
-    url: "https://swapi.dev/api/starships/",
+    url: `{${urlMain}starships/`,
     pages: 4,
   },
 
   vehicles: {
-    url: "https://swapi.dev/api/vehicles/",
+    url: `{${urlMain}vehicles/`,
     pages: 4,
   },
 };

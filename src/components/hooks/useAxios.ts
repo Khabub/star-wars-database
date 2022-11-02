@@ -35,8 +35,8 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
             cancelToken: source.token,
             signal: controller.signal,
           });
-          setData((prev) => [...prev, ...response.data.results]);
-          // console.log(response.data.results);
+          console.log(response);
+          setData((prev) => [...prev, ...response.data.results]);          
         } catch (err) {
           let message: string;
           const errors = err as Error | AxiosError;
@@ -61,7 +61,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
       setLoading(false);
     };
 
-    if (!effectRef.current) {
+    if (effectRef.current) {
       getData();
     }
 

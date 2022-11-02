@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Error = styled.div`
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   translate: -50%;

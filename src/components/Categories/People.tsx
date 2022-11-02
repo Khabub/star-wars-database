@@ -5,6 +5,7 @@ import { PagesContainer } from "../Layout/Pages.styles";
 import { swCategories } from "../store/sw-data";
 import { useState } from "react";
 import ModalPeople from "../Layout/ModalPeople";
+import { Error } from "./Category.styles";
 
 export interface PeopleInterface {
   name: string;
@@ -29,7 +30,7 @@ const initial: PeopleInterface = {
 };
 
 const People = () => {
-  const { loading, data } = useAxios<PeopleInterface>(
+  const { loading, data, error } = useAxios<PeopleInterface>(
     swCategories.people.url,
     swCategories.people.pages
   );
@@ -65,6 +66,7 @@ const People = () => {
 
   return (
     <PagesContainer>
+       {error.isError && <Error>{error.errorMessage}</Error>}
       {loading ? <Loading /> : list}
       {showModal ? (
         <ModalPeople details={details} onClose={closeDetails} />
