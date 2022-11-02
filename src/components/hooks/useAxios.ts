@@ -23,7 +23,7 @@ const useAxios = <T extends object>(url: string, n: number = 1) => {
     const source = CancelToken.source();
 
     setLoading(true);
-    setData([]);
+    //setData([]);
 
     if (effectRef.current) {
       effectRef.current = false;
