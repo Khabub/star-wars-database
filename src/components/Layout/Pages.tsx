@@ -7,6 +7,8 @@ import Films from "../Categories/Films";
 import Starships from "../Categories/Starships";
 import Vehicles from "../Categories/Vehicles";
 
+
+
 const Pages = () => {
   return (
     <StyledPages>

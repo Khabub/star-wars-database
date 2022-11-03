@@ -1,30 +1,22 @@
 import Menu from "./components/Layout/Menu";
 import styled from "styled-components";
 import Pages from "./components/Layout/Pages";
-// import { useEffect, useState } from "react";
 import backgroundImage from "./assets/sw-background-unsplash.jpg";
+import SelectMenu from "./components/UI/SelectMenu";
+import MyContextProvider from "./components/store/context";
 
-const App = (): JSX.Element => {
-/*   const [pos, setPos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    window.addEventListener("mousemove", (e: MouseEvent) => {
-      setPos({ x: e.clientX, y: e.clientY });
-    });
-
-    return () => {
-      window.addEventListener("mousemove", () => {});
-    };
-  }, []); */
-
+const App = (): JSX.Element => { 
+  
   return (
+    <MyContextProvider>
     <Container>
       <img className="bgImage" src={backgroundImage} alt="background"></img>
       <h1>Star Wars Database</h1>
-      <Menu />
+      <Menu />      
+      <SelectMenu />
       <Pages />
-      {/* <p>{`X: ${pos.x} , Y: ${pos.y} , ${window.screen.width}`}</p> */}
     </Container>
+    </MyContextProvider>
   );
 };
 

@@ -34,6 +34,7 @@ const Container = styled.div`
   text-align: center;
   border-radius: 25px;  
   box-shadow: 0 0 5px #fff; 
+  z-index: 10;
 `;
 
 const StyledBackdrop = styled.div`
