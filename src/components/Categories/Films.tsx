@@ -7,13 +7,15 @@ import { useState } from "react";
 import ModalFilms from "../Layout/ModalFilms";
 import { Error } from "./Category.styles";
 
+
 export interface FilmsInterface {
   title: string;
   episode_id: number;
   opening_crawl: string;
   director: string;
   producer: string;
-  release_date: string;
+  release_date: string;  
+  name: string;
 }
 
 const initial: FilmsInterface = {
@@ -22,7 +24,8 @@ const initial: FilmsInterface = {
   opening_crawl: "",
   director: "",
   producer: "",
-  release_date: "",
+  release_date: "", 
+  name: "", 
 };
 
 const Films = () => {
@@ -43,6 +46,7 @@ const Films = () => {
       director: val.director,
       producer: val.producer,
       release_date: val.release_date,
+      name: val.title,
     });
   };
 

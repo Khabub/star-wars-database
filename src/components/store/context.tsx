@@ -21,6 +21,7 @@ const MyContextProvider = (props: Props) => {
     setState(val);
   };
 
+  
   const myContext: MyContextInterface = {
     setValue: setHandler,
     myValue: state,

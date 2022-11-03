@@ -30,7 +30,6 @@ const initial: PeopleInterface = {
   skin_color: "",
 };
 
-let dataList: PeopleInterface[] = [];
 
 const People = () => {
   const { loading, data, error } = useAxios<PeopleInterface>(
@@ -60,27 +59,11 @@ const People = () => {
   const closeDetails = () => {
     setShowModal(false);
   };
-
-  const sortedData = useMemo(() => [...data], [data]);
-
-  sortedData.sort((a, b) => a.name.localeCompare(b.name));
-
-  useEffect(() => {
-    if (ctx.myValue === "A-Z") {
-      dataList = [...sortedData]
-    } else {    
-      dataList = [...data];
-    }   
-    console.log(" useEffect in People: ", ctx.myValue);
-
-    return () => {
-      console.log("Cleaning...");
-    }
     
-  }, [ctx, data, sortedData]);
+
   
 
-  const list = dataList.map((value, index) => (
+  const list = data.map((value, index) => (
     <Button
       key={index}
       name={value.name}
