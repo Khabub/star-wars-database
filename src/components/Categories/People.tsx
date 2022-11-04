@@ -41,6 +41,7 @@ const People = () => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<PeopleInterface>(initial);
+  const [listView, setListView] = useState<boolean>(false);
 
   const handleClick = (val: PeopleInterface) => {
     setShowModal(true);
@@ -71,10 +72,14 @@ const People = () => {
     />
   ));
 
+  if(ctx.myValue === "A-Z"){
+    setListView(true);
+  };
+
   return (
     <PagesContainer>
       {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : list}
+      {loading ? <Loading /> : listView ? list : ""}
       {showModal ? (
         <ModalPeople details={details} onClose={closeDetails} />
       ) : (
