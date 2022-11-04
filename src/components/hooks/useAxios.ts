@@ -63,12 +63,12 @@ const useAxios = <T extends { name: string }>(url: string, n: number = 1) => {
     };
   }, [url, n]);
 
-  const sortedData = [...data];
+  /*const sortedData = [...data];
   sortedData.sort((a, b) => a.name.localeCompare(b.name));
 
   if (ctx.myValue === "A-Z"){
    setData(sortedData);
-  }
+  }*/
 
   return {
     loading,
