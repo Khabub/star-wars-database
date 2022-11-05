@@ -7,7 +7,7 @@ import { useState } from "react";
 import ModalFilms from "../Layout/ModalFilms";
 import { Error } from "./Category.styles";
 
-
+// Variables types
 export interface FilmsInterface {
   title: string;
   episode_id: number;
@@ -18,6 +18,7 @@ export interface FilmsInterface {
   name: string;
 }
 
+// Variables initialisation 
 const initial: FilmsInterface = {
   title: "",
   episode_id: 0,
@@ -29,6 +30,10 @@ const initial: FilmsInterface = {
 };
 
 const Films = () => {
+// Using custom hook with type casting
+// loading - Are the data loaded?
+// data - Data from the database (sort by index or alphabetically)
+// error - An error text.
   const { loading, data, error } = useAxios<FilmsInterface>(
     swCategories.films.url,
     swCategories.films.pages
@@ -37,6 +42,7 @@ const Films = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<FilmsInterface>(initial);
 
+// Show modal window and set data from database to variables
   const handleClick = (val: FilmsInterface) => {
     setShowModal(true);
     setDetails({
@@ -50,10 +56,12 @@ const Films = () => {
     });
   };
 
+// Hide modal window
   const closeDetails = () => {
     setShowModal(false);
   };
   
+// Assign mapped data to variable
   const list = data.map((value, index) => (
     <Button
       key={index}
