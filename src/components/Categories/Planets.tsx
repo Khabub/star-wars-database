@@ -3,9 +3,10 @@ import Loading from "../UI/Loading";
 import Button from "../UI/Button";
 import { PagesContainer } from "../Layout/Pages.styles";
 import { swCategories } from "../store/sw-data";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Error } from "./Category.styles";
 import ModalPlanets from "../Layout/ModalPlanets";
+import { MyContext } from "../store/context";
 
 export interface PlanetsInterface {
   name: string;
@@ -32,10 +33,12 @@ const initial: PlanetsInterface = {
 };
 
 const Planets = () => {
-  const { loading, data, error } = useAxios<PlanetsInterface>(
+  const { loading, data, error, sortedData } = useAxios<PlanetsInterface>(
     swCategories.planets.url,
     swCategories.planets.pages
   );
+
+  const ctx = useContext(MyContext);
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<PlanetsInterface>(initial);
@@ -59,18 +62,24 @@ const Planets = () => {
     setShowModal(false);
   };
 
-  const list = data.map((value, index) => (
-    <Button
-      key={index}
-      name={value.name}
-      onClick={handleClick.bind(null, value)}
-    />
-  ));
+  const listingFce = (data: PlanetsInterface[]) => {
+    const list = data.map((value, index) => (
+      <Button
+        key={index}
+        name={value.name}
+        onClick={handleClick.bind(null, value)}
+      />
+    ));
+    return list;
+  };
+
+  const listing =
+    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
 
   return (
     <PagesContainer>
       {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : list}
+      {loading ? <Loading /> : listing}
       {showModal ? (
         <ModalPlanets details={details} onClose={closeDetails} />
       ) : (

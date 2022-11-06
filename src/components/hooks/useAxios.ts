@@ -1,6 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { useState, useEffect, useRef, useContext, useCallback } from "react";
-import { MyContext } from "../store/context";
+import { useState, useEffect, useRef } from "react";
 interface ErrorInterface {
   errorMessage: string;
   isError: boolean;
@@ -11,20 +10,15 @@ const errorInit: ErrorInterface = {
   isError: false,
 };
 
-const useAxios = <T extends { name: string }>(url: string, n: number = 1) => {
+const useAxios = <T extends { name?: string; title?: string }>(
+  url: string,
+  n: number = 1
+) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<T[]>([]);
   const [error, setError] = useState<ErrorInterface>(errorInit);
 
-  const ctx = useContext(MyContext);
-
   const firstRunRef = useRef<boolean>(true);
-
-/*   const dataCallback = useCallback(() => {
-    const sortedData = [...data];
-    sortedData.sort((a, b) => a.name.localeCompare(b.name));
-    setData(sortedData);
-  }, [data]); */
 
   useEffect(() => {
     const controller = new AbortController();
@@ -55,25 +49,27 @@ const useAxios = <T extends { name: string }>(url: string, n: number = 1) => {
 
     getData();
 
-    
-
     return () => {
       controller.abort();
       firstRunRef.current = false;
     };
   }, [url, n]);
 
-  /*const sortedData = [...data];
-  sortedData.sort((a, b) => a.name.localeCompare(b.name));
+  const sortedData = [...data];
 
-  if (ctx.myValue === "A-Z"){
-   setData(sortedData);
-  }*/
+  if (data[0] !== undefined) {
+    if ("title" in data[0]) {
+      sortedData.sort((a, b) => a.title!.localeCompare(b.title!));
+    } else {
+      sortedData.sort((a, b) => a.name!.localeCompare(b.name!));
+    }
+  }
 
   return {
     loading,
     data,
     error,
+    sortedData,
   };
 };
 

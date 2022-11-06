@@ -1,7 +1,7 @@
-import Select, { PropsValue, SingleValue, StylesConfig } from "react-select";
+import Select, { SingleValue, StylesConfig } from "react-select";
 import { useState, useContext, useEffect } from "react";
 import { CSSProperties } from "styled-components";
-import {MyContext} from "../store/context";
+import { MyContext } from "../store/context";
 
 interface Options {
   value: string;
@@ -28,7 +28,7 @@ const customControlStyles: CSSProperties = {
 
 const customSingleValueStyles: CSSProperties = {
   color: "rgb(50, 160, 155)",
-  fontWeight: "bold",   
+  fontWeight: "bold",
   translate: "0 -2px",
 };
 
@@ -53,21 +53,24 @@ const SelectMenu = () => {
   const [select, setSelect] = useState<string>("");
   const ctx = useContext(MyContext);
 
-  const selectHandler= (event: SingleValue<Options>) => {
-    setSelect(event!.value); 
+  const selectHandler = (event: SingleValue<Options>) => {
+    setSelect(event!.value);
+  };
+
+  // musel jsem dát do useEffect, jinak háže chybu
+  useEffect(() => {
     ctx.setValue(select);
-    console.log("SelectMenu: ", ctx.myValue);
-  }
+  },[ctx, select]);
 
   return (
     <Select
-        options={options}               
-        isSearchable={false}
-        styles={customStyles}     
-        onChange={selectHandler} 
-        placeholder={"Choose sorting"}          
-      />
-  )
-}
+      options={options}
+      isSearchable={false}
+      styles={customStyles}
+      onChange={selectHandler}
+      placeholder={"Choose sorting"}
+    />
+  );
+};
 
 export default SelectMenu;

@@ -3,9 +3,10 @@ import Loading from "../UI/Loading";
 import Button from "../UI/Button";
 import { PagesContainer } from "../Layout/Pages.styles";
 import { swCategories } from "../store/sw-data";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Error } from "./Category.styles";
 import ModalSpecies from "../Layout/ModalSpecies";
+import { MyContext } from "../store/context";
 
 export interface SpeciesInterface {
   name: string;
@@ -32,10 +33,12 @@ const initial: SpeciesInterface = {
 };
 
 const Species = () => {
-  const { loading, data, error } = useAxios<SpeciesInterface>(
+  const { loading, data, error, sortedData } = useAxios<SpeciesInterface>(
     swCategories.species.url,
     swCategories.species.pages
   );
+
+  const ctx = useContext(MyContext);
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<SpeciesInterface>(initial);
@@ -59,19 +62,25 @@ const Species = () => {
     setShowModal(false);
   };
 
-  const list = data.map((value, index) => (
-    <Button
-      key={index}
-      name={value.name}
-      onClick={handleClick.bind(null, value)}
-    />
-  ));
+  const listingFce = (data: SpeciesInterface[]) => {
+    const list = data.map((value, index) => (
+      <Button
+        key={index}
+        name={value.name}
+        onClick={handleClick.bind(null, value)}
+      />
+    ));
+    return list;
+  };
+
+  const listing =
+    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
 
   return (
     <PagesContainer>
       {" "}
       {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : list}
+      {loading ? <Loading /> : listing}
       {showModal ? (
         <ModalSpecies details={details} onClose={closeDetails} />
       ) : (

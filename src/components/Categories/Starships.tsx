@@ -3,9 +3,10 @@ import Loading from "../UI/Loading";
 import Button from "../UI/Button";
 import { PagesContainer } from "../Layout/Pages.styles";
 import { swCategories } from "../store/sw-data";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Error } from "./Category.styles";
 import ModalStarships from "../Layout/ModalStarships";
+import { MyContext } from "../store/context";
 
 export interface StarshipsInterface {
   name: string;
@@ -40,10 +41,12 @@ const initial: StarshipsInterface = {
 }
 
 const Starships = () => {
-  const { loading, data, error } = useAxios<StarshipsInterface>(
+  const { loading, data, error, sortedData } = useAxios<StarshipsInterface>(
     swCategories.starships.url,
     swCategories.starships.pages
   );
+
+  const ctx = useContext(MyContext);
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<StarshipsInterface>(initial);
@@ -71,12 +74,22 @@ const Starships = () => {
     setShowModal(false);
   };
 
-  const list = data.map((value, index) => (
-    <Button key={index} name={value.name} onClick={handleClick.bind(null, value)}/>
-  ));
+  const listingFce = (data: StarshipsInterface[]) => {
+    const list = data.map((value, index) => (
+      <Button
+        key={index}
+        name={value.name}
+        onClick={handleClick.bind(null, value)}
+      />
+    ));
+    return list;
+  };
+
+  const listing =
+    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
 
   return <PagesContainer>{error.isError && <Error>{error.errorMessage}</Error>}
-  {loading ? <Loading /> : list}
+  {loading ? <Loading /> : listing}
   {showModal ? (
     <ModalStarships details={details} onClose={closeDetails} />
   ) : (

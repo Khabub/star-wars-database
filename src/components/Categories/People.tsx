@@ -3,7 +3,7 @@ import Loading from "../UI/Loading";
 import Button from "../UI/Button";
 import { PagesContainer } from "../Layout/Pages.styles";
 import { swCategories } from "../store/sw-data";
-import { useState, useContext, useEffect, useMemo } from "react";
+import { useState, useContext } from "react";
 import ModalPeople from "../Layout/ModalPeople";
 import { Error } from "./Category.styles";
 import { MyContext } from "../store/context";
@@ -30,9 +30,8 @@ const initial: PeopleInterface = {
   skin_color: "",
 };
 
-
 const People = () => {
-  const { loading, data, error } = useAxios<PeopleInterface>(
+  const { loading, data, error, sortedData } = useAxios<PeopleInterface>(
     swCategories.people.url,
     swCategories.people.pages
   );
@@ -41,7 +40,6 @@ const People = () => {
 
   const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<PeopleInterface>(initial);
-  const [listView, setListView] = useState<boolean>(false);
 
   const handleClick = (val: PeopleInterface) => {
     setShowModal(true);
@@ -60,26 +58,25 @@ const People = () => {
   const closeDetails = () => {
     setShowModal(false);
   };
-    
 
-  
-
-  const list = data.map((value, index) => (
-    <Button
-      key={index}
-      name={value.name}
-      onClick={handleClick.bind(null, value)}
-    />
-  ));
-
-  if(ctx.myValue === "A-Z"){
-    setListView(true);
+  const listingFce = (data: PeopleInterface[]) => {
+    const list = data.map((value, index) => (
+      <Button
+        key={index}
+        name={value.name}
+        onClick={handleClick.bind(null, value)}
+      />
+    ));
+    return list;
   };
+
+  const listing =
+    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
 
   return (
     <PagesContainer>
       {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : listView ? list : ""}
+      {loading ? <Loading /> : listing}
       {showModal ? (
         <ModalPeople details={details} onClose={closeDetails} />
       ) : (

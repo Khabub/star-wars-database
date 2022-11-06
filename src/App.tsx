@@ -5,17 +5,16 @@ import backgroundImage from "./assets/sw-background-unsplash.jpg";
 import SelectMenu from "./components/UI/SelectMenu";
 import MyContextProvider from "./components/store/context";
 
-const App = (): JSX.Element => { 
-  
+const App = (): JSX.Element => {
   return (
     <MyContextProvider>
-    <Container>
-      <img className="bgImage" src={backgroundImage} alt="background"></img>
-      <h1>Star Wars Database</h1>
-      <Menu />      
-      <SelectMenu />
-      <Pages />
-    </Container>
+      <Container>
+        <img className="bgImage" src={backgroundImage} alt="background"></img>
+        <h1>Star Wars Database</h1>
+        <Menu />
+        <SelectMenu />
+        <Pages />
+      </Container>
     </MyContextProvider>
   );
 };
