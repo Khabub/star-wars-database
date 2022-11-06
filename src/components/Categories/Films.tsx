@@ -15,26 +15,24 @@ export interface FilmsInterface {
   opening_crawl: string;
   director: string;
   producer: string;
-  release_date: string;    
+  release_date: string;
 }
 
-// Variables initialisation 
+// Variables initialisation
 const initial: FilmsInterface = {
   title: "",
   episode_id: 0,
   opening_crawl: "",
   director: "",
   producer: "",
-  release_date: "",   
+  release_date: "",
 };
 
-
-
 const Films = () => {
-// Using custom hook with type casting
-// loading - Are the data loaded?
-// data - Data from the database (sort by index or alphabetically)
-// error - An error text.
+  // Using custom hook with type casting
+  // loading - Are the data loaded?
+  // data - Data from the database (sort by index or alphabetically)
+  // error - An error text.
   const { loading, data, error, sortedData } = useAxios<FilmsInterface>(
     swCategories.films.url,
     swCategories.films.pages
@@ -45,7 +43,7 @@ const Films = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<FilmsInterface>(initial);
 
-// Show modal window and set data from database to variables
+  // Show modal window and set data from database to variables
   const handleClick = (val: FilmsInterface) => {
     setShowModal(true);
     setDetails({
@@ -54,29 +52,29 @@ const Films = () => {
       opening_crawl: val.opening_crawl,
       director: val.director,
       producer: val.producer,
-      release_date: val.release_date,      
+      release_date: val.release_date,
     });
   };
 
-// Hide modal window
+  // Hide modal window
   const closeDetails = () => {
     setShowModal(false);
   };
-  
-// Assign mapped data to variable
-  const listingFce = (data: FilmsInterface[]) => {
-  const list = data.map((value, index) => (
-    <Button
-      key={index}
-      name={value.title}
-      onClick={handleClick.bind(null, value)}
-    />
-  ));
-  return list;
-};
 
-const listing =
-  ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
+  // Assign mapped data to variable
+  const listingFce = (data: FilmsInterface[]) => {
+    const list = data.map((value, index) => (
+      <Button
+        key={index}
+        name={value.title}
+        onClick={handleClick.bind(null, value)}
+      />
+    ));
+    return list;
+  };
+
+  const listing =
+    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
 
   return (
     <PagesContainer>
