@@ -15,7 +15,7 @@ const loading = keyframes`
 
 const Container = styled.div`
   position: fixed;
-  top: 50%;
+  top: 60%;
   left: 50%;
   translate: -50% -50%;
   width: 50px;

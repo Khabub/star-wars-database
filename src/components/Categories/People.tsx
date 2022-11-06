@@ -1,12 +1,8 @@
-import useAxios from "../hooks/useAxios";
-import Loading from "../UI/Loading";
-import Button from "../UI/Button";
-import { PagesContainer } from "../Layout/Pages.styles";
-import { swCategories } from "../store/sw-data";
-import { useState, useContext } from "react";
+import CategoryTemplate from "./CategoryTemplate";
 import ModalPeople from "../Layout/ModalPeople";
-import { Error } from "./Category.styles";
-import { MyContext } from "../store/context";
+import Button from "../UI/Button";
+import { useState } from "react";
+import { swCategories } from "../store/sw-data";
 
 export interface PeopleInterface {
   name: string;
@@ -14,8 +10,8 @@ export interface PeopleInterface {
   eye_color: string;
   gender: string;
   hair_color: string;
-  height: number;
-  mass: number;
+  height: string;
+  mass: string;
   skin_color: string;
 }
 
@@ -25,21 +21,24 @@ const initial: PeopleInterface = {
   eye_color: "",
   gender: "",
   hair_color: "",
-  height: 0,
-  mass: 0,
+  height: "",
+  mass: "",
   skin_color: "",
 };
 
+interface SWCategories {
+  url: string;
+  pages: number;  
+}
+
+const swCateg: SWCategories = {
+  url: swCategories.people.url,
+  pages: swCategories.people.pages,
+}
+
 const People = () => {
-  const { loading, data, error, sortedData } = useAxios<PeopleInterface>(
-    swCategories.people.url,
-    swCategories.people.pages
-  );
-
-  const ctx = useContext(MyContext);
-
-  const [showModal, setShowModal] = useState<boolean>(false);
   const [details, setDetails] = useState<PeopleInterface>(initial);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleClick = (val: PeopleInterface) => {
     setShowModal(true);
@@ -55,10 +54,6 @@ const People = () => {
     });
   };
 
-  const closeDetails = () => {
-    setShowModal(false);
-  };
-
   const listingFce = (data: PeopleInterface[]) => {
     const list = data.map((value, index) => (
       <Button
@@ -70,19 +65,18 @@ const People = () => {
     return list;
   };
 
-  const listing =
-    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
+  const closeDetails = () => {
+    setShowModal(false);
+  };
 
   return (
-    <PagesContainer>
-      {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : listing}
+    <CategoryTemplate listingFce={listingFce} url={swCateg.url} pages={swCateg.pages}>
       {showModal ? (
         <ModalPeople details={details} onClose={closeDetails} />
       ) : (
         ""
       )}
-    </PagesContainer>
+    </CategoryTemplate>
   );
 };
 
