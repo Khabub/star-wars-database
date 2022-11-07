@@ -17,8 +17,7 @@ const CategoryTemplate = <T extends object>(props: Props<T>) => {
     props.pages
   );
 
-  
-  const ctx = useContext(MyContext);  
+  const ctx = useContext(MyContext);
 
   const listing =
     ctx.myValue === "A-Z"

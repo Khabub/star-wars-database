@@ -37,8 +37,8 @@ export interface PeopleInterface {
   eye_color: string;
   gender: string;
   hair_color: string;
-  height: string;
-  mass: string;
+  height: number;
+  mass: number;
   skin_color: string;
 }
 
@@ -48,8 +48,8 @@ export const initialPeople: PeopleInterface = {
   eye_color: "",
   gender: "",
   hair_color: "",
-  height: "",
-  mass: "",
+  height: 0,
+  mass: 0,
   skin_color: "",
 };
 

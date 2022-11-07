@@ -58,6 +58,7 @@ const useAxios = <T extends { name?: string; title?: string }>(
 
   const sortedData = [...data];
 
+  //Sorting
   if (data[0] !== undefined) {
     if ("title" in data[0]) {
       sortedData.sort((a, b) => a.title!.localeCompare(b.title!));
