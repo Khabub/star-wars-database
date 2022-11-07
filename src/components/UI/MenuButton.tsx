@@ -32,7 +32,7 @@ const UL = styled.ul`
 
   .active img {
     border-color: #90b331;
-    border-width: 4px;
+    border-width: 2px;
   }
 `;
 
@@ -48,6 +48,12 @@ const NavLinkStyled = styled(NavLink)`
     color: #90b331;
     text-shadow: 2px 2px 2px black;
     margin: 0;
+
+    @media (min-width: 1200px) {
+      font-size: 1.5rem;
+      text-shadow: 3px 3px 3px black;
+      margin: 0;
+    }
   }
 
   img {
@@ -60,9 +66,14 @@ const NavLinkStyled = styled(NavLink)`
     border-radius: 25px;
 
     // hover dát jen u desktopu
-    /* &:hover {
-      border-color: #bb831c;
-      border-width: 4px;
-    } */
+    @media (min-width: 1200px) {
+      width: 200px;
+      height: 120px;
+
+      &:hover {
+        border-color: #bb831c;
+        border-width: 2px;
+      }
+    }
   }
 `;

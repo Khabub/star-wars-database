@@ -7,7 +7,7 @@ export const ContainerBigger = styled.div`
   width: 70vw;
   overflow-y: scroll;
 
-  @media (min-width: 599px) {
+  @media (min-width: 600px) {
     width: 90vw;
 
     .description {
@@ -20,8 +20,9 @@ export const ContainerBigger = styled.div`
       margin: 0.5rem 1rem;
     }
 
-    .crawlhide {
-      display: none;
+    .crawl {
+      display: flex;
+      flex-direction: column;
     }
   }
 `;
@@ -35,6 +36,10 @@ export const H1 = styled.h1`
   margin: 0.6rem 0 0 0;
   padding: 0;
   font-size: 1.1rem;
+
+  @media (min-width: 1200px) {
+    font-size: 2.2rem;
+  }
 `;
 
 // Types
@@ -47,9 +52,14 @@ export const H2 = styled.h2`
   padding: 0;
   font-size: 0.9rem;
 
-  @media (min-width: 599px) {
+  @media (min-width: 600px) {
     flex-grow: 0;
     flex-basis: 24%;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 1.8rem;
+    flex-basis: 40%;
   }
 `;
 
@@ -60,8 +70,12 @@ export const P = styled.p`
   padding: 0;
   font-size: 0.9rem;
 
-  @media (min-width: 599px) {
-    flex-grow: 0;
-    flex-basis: 24%;    
+  @media (min-width: 600px) {
+    flex-basis: 24%;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 1.8rem;
+    flex-basis: 60%;
   }
 `;

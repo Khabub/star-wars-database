@@ -2,9 +2,6 @@ import Select, { SingleValue, StylesConfig } from "react-select";
 import { useState, useContext, useEffect } from "react";
 import { CSSProperties } from "styled-components";
 import { MyContext } from "../store/context";
-import { redirect } from "react-router-dom";
-
-
 interface Options {
   value: string;
   label: string;
@@ -25,7 +22,7 @@ const customControlStyles: CSSProperties = {
   alignItems: "center",
   justifyContent: "center",
   padding: "0",
-  marginTop: "0.5rem",  
+  marginTop: "0.5rem",
 };
 
 const customSingleValueStyles: CSSProperties = {
@@ -52,7 +49,7 @@ const customStyles: StylesConfig<Options, isMulti> = {
   placeholder: (provided) => {
     return {
       ...provided,
-      padding: "0 0 0.3rem 0",      
+      padding: "0 0 0.3rem 0",
     };
   },
 };

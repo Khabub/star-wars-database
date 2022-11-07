@@ -44,5 +44,10 @@ const Container = styled.div`
     font-size: 1.9rem;
     color: #eeaf3b;
     text-shadow: 3px 3px 3px black;
+
+    @media (min-width: 1200px){
+      font-size: 3rem;
+      text-shadow: 5px 5px 5px black;
+    }
   }
 `;
