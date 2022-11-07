@@ -25,4 +25,8 @@ const Container = styled.div`
   border: 3px solid #c5c5c5;
   border-top-color: black;
   animation: ${loading} 0.5s linear infinite;
+
+  @media (min-width: 599px){
+    top: 85%;
+  }
 `;

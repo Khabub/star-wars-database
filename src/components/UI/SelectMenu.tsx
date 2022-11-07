@@ -52,7 +52,7 @@ const customStyles: StylesConfig<Options, isMulti> = {
   placeholder: (provided) => {
     return {
       ...provided,
-      padding: "0 0 0.5rem 0",      
+      padding: "0 0 0.3rem 0",      
     };
   },
 };
