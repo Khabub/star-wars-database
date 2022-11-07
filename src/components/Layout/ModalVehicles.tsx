@@ -1,4 +1,4 @@
-import { VehiclesInterface } from "../Categories/Vehicles";
+import { VehiclesInterface } from "../store/categories-inits";
 import Modal from "../UI/Modal";
 import { ContainerBigger, H1, H2, P } from "./ModalCategory";
 

@@ -1,43 +1,15 @@
 import CategoryTemplate from "./CategoryTemplate";
-import ModalPeople from "../Layout/ModalPeople";
 import Button from "../UI/Button";
 import { useState } from "react";
-import { swCategories } from "../store/sw-data";
-
-export interface PeopleInterface {
-  name: string;
-  birth_year: string;
-  eye_color: string;
-  gender: string;
-  hair_color: string;
-  height: string;
-  mass: string;
-  skin_color: string;
-}
-
-const initial: PeopleInterface = {
-  name: "",
-  birth_year: "",
-  eye_color: "",
-  gender: "",
-  hair_color: "",
-  height: "",
-  mass: "",
-  skin_color: "",
-};
-
-interface SWCategories {
-  url: string;
-  pages: number;  
-}
-
-const swCateg: SWCategories = {
-  url: swCategories.people.url,
-  pages: swCategories.people.pages,
-}
+import {
+  PeopleInterface,
+  initialPeople,
+  swCategPeople,
+} from "../store/categories-inits";
+import ModalPeople from "../Layout/ModalPeople";
 
 const People = () => {
-  const [details, setDetails] = useState<PeopleInterface>(initial);
+  const [details, setDetails] = useState<PeopleInterface>(initialPeople);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleClick = (val: PeopleInterface) => {
@@ -70,7 +42,11 @@ const People = () => {
   };
 
   return (
-    <CategoryTemplate listingFce={listingFce} url={swCateg.url} pages={swCateg.pages}>
+    <CategoryTemplate
+      listingFce={listingFce}
+      url={swCategPeople.url}
+      pages={swCategPeople.pages}
+    >
       {showModal ? (
         <ModalPeople details={details} onClose={closeDetails} />
       ) : (

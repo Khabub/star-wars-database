@@ -1,4 +1,4 @@
-import { FilmsInterface } from "../Categories/Films";
+import { FilmsInterface } from "../store/categories-inits";
 import Modal from "../UI/Modal";
 import { H1, H2, P, ContainerBigger } from "./ModalCategory";
 

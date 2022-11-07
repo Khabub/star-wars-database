@@ -1,4 +1,4 @@
-import { PlanetsInterface } from "../Categories/Planets";
+import { PlanetsInterface } from "../store/categories-inits";
 import Modal from "../UI/Modal";
 import { H1, H2, P, Container } from "./ModalCategory";
 

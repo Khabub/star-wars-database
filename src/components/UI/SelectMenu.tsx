@@ -69,6 +69,7 @@ const SelectMenu = () => {
       styles={customStyles}
       onChange={selectHandler}
       placeholder={"Choose sorting"}
+      isDisabled={ctx.loadValue}
     />
   );
 };

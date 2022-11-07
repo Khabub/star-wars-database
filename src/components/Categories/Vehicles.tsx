@@ -1,51 +1,16 @@
-import useAxios from "../hooks/useAxios";
-import Loading from "../UI/Loading";
+import CategoryTemplate from "./CategoryTemplate";
 import Button from "../UI/Button";
-import { PagesContainer } from "../Layout/Pages.styles";
-import { swCategories } from "../store/sw-data";
-import { useState, useContext } from "react";
-import { Error } from "./Category.styles";
+import { useState } from "react";
+import {
+  VehiclesInterface,
+  initialVehicles,
+  swCategVehicles,
+} from "../store/categories-inits";
 import ModalVehicles from "../Layout/ModalVehicles";
-import { MyContext } from "../store/context";
-
-export interface VehiclesInterface {
-  name: string;
-  model: string;
-  vehicle_class: string;
-  manufacturer: string;
-  length: number;
-  cost_in_credits: number;
-  crew: number;
-  passengers: number;
-  max_atmosphering_speed: number;
-  cargo_capacity: number;
-  consumables: string;
-}
-
-const initial: VehiclesInterface = {
-  name: "",
-  model: "",
-  vehicle_class: "",
-  manufacturer: "",
-  length: 0,
-  cost_in_credits: 0,
-  crew: 0,
-  passengers: 0,
-  max_atmosphering_speed: 0,
-  cargo_capacity: 0,
-  consumables: "",
-};
 
 const Vehicles = () => {
-  const { loading, data, error, sortedData } = useAxios<VehiclesInterface>(
-    swCategories.vehicles.url,
-    swCategories.vehicles.pages
-  );
-
-  const ctx = useContext(MyContext);
-
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [details, setDetails] = useState<VehiclesInterface>(initial);
+  const [details, setDetails] = useState<VehiclesInterface>(initialVehicles);
 
   const handleClick = (val: VehiclesInterface) => {
     setShowModal(true);
@@ -64,10 +29,6 @@ const Vehicles = () => {
     });
   };
 
-  const closeDetails = () => {
-    setShowModal(false);
-  };
-
   const listingFce = (data: VehiclesInterface[]) => {
     const list = data.map((value, index) => (
       <Button
@@ -79,19 +40,22 @@ const Vehicles = () => {
     return list;
   };
 
-  const listing =
-    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
+  const closeDetails = () => {
+    setShowModal(false);
+  };
 
   return (
-    <PagesContainer>
-      {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : listing}
+    <CategoryTemplate
+      listingFce={listingFce}
+      url={swCategVehicles.url}
+      pages={swCategVehicles.pages}
+    >
       {showModal ? (
         <ModalVehicles details={details} onClose={closeDetails} />
       ) : (
         ""
       )}
-    </PagesContainer>
+    </CategoryTemplate>
   );
 };
 

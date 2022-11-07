@@ -1,4 +1,4 @@
-import { SpeciesInterface } from "../Categories/Species";
+import { SpeciesInterface } from "../store/categories-inits";
 import Modal from "../UI/Modal";
 import { Container, H1, H2, P } from "./ModalCategory";
 

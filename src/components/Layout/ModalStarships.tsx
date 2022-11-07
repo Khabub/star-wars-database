@@ -1,4 +1,4 @@
-import { StarshipsInterface } from "../Categories/Starships";
+import { StarshipsInterface } from "../store/categories-inits";
 import Modal from "../UI/Modal";
 import { ContainerBigger, H1, H2, P } from "./ModalCategory";
 

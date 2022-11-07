@@ -1,47 +1,16 @@
-import useAxios from "../hooks/useAxios";
-import Loading from "../UI/Loading";
+import CategoryTemplate from "./CategoryTemplate";
 import Button from "../UI/Button";
-import { PagesContainer } from "../Layout/Pages.styles";
-import { swCategories } from "../store/sw-data";
-import { useState, useContext } from "react";
-import { Error } from "./Category.styles";
+import { useState } from "react";
+import {
+  PlanetsInterface,
+  initialPlanets,
+  swCategPlanets,
+} from "../store/categories-inits";
 import ModalPlanets from "../Layout/ModalPlanets";
-import { MyContext } from "../store/context";
-
-export interface PlanetsInterface {
-  name: string;
-  climate: string;
-  diameter: number;
-  rotation_period: number;
-  orbital_period: number;
-  gravity: number;
-  population: number;
-  terrain: string;
-  surface_water: number;
-}
-
-const initial: PlanetsInterface = {
-  name: "",
-  climate: "",
-  diameter: 0,
-  rotation_period: 0,
-  orbital_period: 0,
-  gravity: 0,
-  population: 0,
-  terrain: "",
-  surface_water: 0,
-};
 
 const Planets = () => {
-  const { loading, data, error, sortedData } = useAxios<PlanetsInterface>(
-    swCategories.planets.url,
-    swCategories.planets.pages
-  );
-
-  const ctx = useContext(MyContext);
-
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [details, setDetails] = useState<PlanetsInterface>(initial);
+  const [details, setDetails] = useState<PlanetsInterface>(initialPlanets);
 
   const handleClick = (val: PlanetsInterface) => {
     setShowModal(true);
@@ -58,10 +27,6 @@ const Planets = () => {
     });
   };
 
-  const closeDetails = () => {
-    setShowModal(false);
-  };
-
   const listingFce = (data: PlanetsInterface[]) => {
     const list = data.map((value, index) => (
       <Button
@@ -73,19 +38,22 @@ const Planets = () => {
     return list;
   };
 
-  const listing =
-    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
+  const closeDetails = () => {
+    setShowModal(false);
+  };
 
   return (
-    <PagesContainer>
-      {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : listing}
+    <CategoryTemplate
+      listingFce={listingFce}
+      url={swCategPlanets.url}
+      pages={swCategPlanets.pages}
+    >
       {showModal ? (
         <ModalPlanets details={details} onClose={closeDetails} />
       ) : (
         ""
       )}
-    </PagesContainer>
+    </CategoryTemplate>
   );
 };
 

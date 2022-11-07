@@ -27,6 +27,7 @@ const useAxios = <T extends { name?: string; title?: string }>(
 
     const getData = async () => {
       setLoading(true);
+
       for (let i = 1; i <= n; i++) {
         try {
           const response = await axios.get(url, {

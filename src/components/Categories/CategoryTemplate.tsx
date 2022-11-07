@@ -1,11 +1,9 @@
 import { PagesContainer } from "../Layout/Pages.styles";
 import Loading from "../UI/Loading";
 import { Error } from "./Category.styles";
-
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import useAxios from "../hooks/useAxios";
 import { MyContext } from "../store/context";
-
 interface Props<T> {
   children?: React.ReactNode;
   listingFce: (v: T[]) => JSX.Element[];
@@ -19,12 +17,17 @@ const CategoryTemplate = <T extends object>(props: Props<T>) => {
     props.pages
   );
 
-  const ctx = useContext(MyContext);
+  
+  const ctx = useContext(MyContext);  
 
   const listing =
     ctx.myValue === "A-Z"
       ? props.listingFce(sortedData)
       : props.listingFce(data);
+
+  useEffect(() => {
+    ctx.setLoad(loading);
+  }, [ctx, loading]);
 
   return (
     <PagesContainer>

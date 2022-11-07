@@ -1,47 +1,16 @@
-import useAxios from "../hooks/useAxios";
-import Loading from "../UI/Loading";
+import CategoryTemplate from "./CategoryTemplate";
 import Button from "../UI/Button";
-import { PagesContainer } from "../Layout/Pages.styles";
-import { swCategories } from "../store/sw-data";
-import { useState, useContext } from "react";
-import { Error } from "./Category.styles";
+import { useState } from "react";
+import {
+  SpeciesInterface,
+  initialSpecies,
+  swCategSpecies,
+} from "../store/categories-inits";
 import ModalSpecies from "../Layout/ModalSpecies";
-import { MyContext } from "../store/context";
-
-export interface SpeciesInterface {
-  name: string;
-  classification: string;
-  designation: string;
-  average_height: number;
-  average_lifespan: number;
-  language: string;
-  eye_colors: string;
-  hair_colors: string;
-  skin_colors: string;
-}
-
-const initial: SpeciesInterface = {
-  name: "",
-  classification: "",
-  designation: "",
-  average_height: 0,
-  average_lifespan: 0,
-  language: "",
-  eye_colors: "",
-  hair_colors: "",
-  skin_colors: "",
-};
 
 const Species = () => {
-  const { loading, data, error, sortedData } = useAxios<SpeciesInterface>(
-    swCategories.species.url,
-    swCategories.species.pages
-  );
-
-  const ctx = useContext(MyContext);
-
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [details, setDetails] = useState<SpeciesInterface>(initial);
+  const [details, setDetails] = useState<SpeciesInterface>(initialSpecies);
 
   const handleClick = (val: SpeciesInterface) => {
     setShowModal(true);
@@ -58,10 +27,6 @@ const Species = () => {
     });
   };
 
-  const closeDetails = () => {
-    setShowModal(false);
-  };
-
   const listingFce = (data: SpeciesInterface[]) => {
     const list = data.map((value, index) => (
       <Button
@@ -73,20 +38,22 @@ const Species = () => {
     return list;
   };
 
-  const listing =
-    ctx.myValue === "A-Z" ? listingFce(sortedData) : listingFce(data);
+  const closeDetails = () => {
+    setShowModal(false);
+  };
 
   return (
-    <PagesContainer>
-      {" "}
-      {error.isError && <Error>{error.errorMessage}</Error>}
-      {loading ? <Loading /> : listing}
+    <CategoryTemplate
+      listingFce={listingFce}
+      url={swCategSpecies.url}
+      pages={swCategSpecies.pages}
+    >
       {showModal ? (
         <ModalSpecies details={details} onClose={closeDetails} />
       ) : (
         ""
       )}
-    </PagesContainer>
+    </CategoryTemplate>
   );
 };
 
