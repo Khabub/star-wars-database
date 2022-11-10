@@ -11,10 +11,9 @@ type SwCategory =
   | "starships"
   | "vehicles";
 
-//const urlMain: string = "https://swapi.py4e.com/api/";
-const urlMain: string = "https://swapi.dev/api";
+// const urlMain: string = "https://swapi.py4e.com/api/";
 
-// const urlMain = "../../assets/films.json";
+const urlMain: string = "https://swapi.dev/api";
 
 export const swCategories: Record<SwCategory, SwItems> = {
   planets: {

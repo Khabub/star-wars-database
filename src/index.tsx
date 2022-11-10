@@ -14,10 +14,3 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-
-// media queries podle Material UI
-// mobil:     do  599px
-// tablet:    od  600px do 899px
-// laptop:    od  900px do 1199px
-// pc:        od 1200px do 1535px
-// pc extra:  od 1536px

@@ -25,7 +25,7 @@ const Films = () => {
     });
   };
 
-  // Assign mapped data to variable
+  // Assign data to variable
   const listingFce = (data: FilmsInterface[]) => {
     const list = data.map((value, index) => (
       <Button

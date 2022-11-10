@@ -35,7 +35,7 @@ const Container = styled.div`
   border-radius: 25px;
   box-shadow: 0 0 5px #fff;
   z-index: 10;
-  cursor: pointer;
+  cursor: pointer;  
 `;
 
 const StyledBackdrop = styled.div`

@@ -10,6 +10,7 @@ const errorInit: ErrorInterface = {
   isError: false,
 };
 
+// name? and title? = because of using sorting
 const useAxios = <T extends { name?: string; title?: string }>(
   url: string,
   n: number = 1

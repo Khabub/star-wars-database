@@ -5,7 +5,7 @@ export const ContainerBigger = styled.div`
   display: flex;
   flex-direction: column;
   width: 70vw;
-  overflow-y: scroll;
+  overflow-y: hidden;
 
   @media (min-width: 600px) {
     width: 90vw;
